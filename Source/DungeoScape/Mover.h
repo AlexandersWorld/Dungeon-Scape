@@ -10,13 +10,14 @@ class DUNGEOSCAPE_API UMover : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	UMover();
+private:	
+	bool ShouldMove = false;
 
 protected:
 	virtual void BeginPlay() override;
 
 public:	
+	UMover();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(VisibleAnywhere)
@@ -33,10 +34,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	float MoveTime = 4.0f;
 
-	UPROPERTY(EditAnywhere)
-	bool ShouldMove = false;
-
 	UPROPERTY(VisibleAnywhere)
 	bool ReachedTarget = false;
 
+	UFUNCTION()
+	void SetShouldMove(bool NewShouldMove);
+
+	UFUNCTION()
+	bool GetShouldMove();
 };

@@ -35,7 +35,6 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 		TargetLocation = StartLocation;
 	}
 	
-
 	FVector CurrentLocation = GetOwner()->GetActorLocation();
 
 	ReachedTarget = CurrentLocation.Equals(TargetLocation);
@@ -48,4 +47,14 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 
 		GetOwner()->SetActorLocation(NewLocation);
 	}
+}
+
+void UMover::SetShouldMove(bool NewShouldMove)
+{
+	ShouldMove = NewShouldMove;
+}
+
+bool UMover::GetShouldMove()
+{
+	return ShouldMove;
 }
