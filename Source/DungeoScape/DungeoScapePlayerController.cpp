@@ -33,9 +33,7 @@ void ADungeoScapePlayerController::BeginPlay()
 			MobileControlsWidget->AddToPlayerScreen(0);
 
 		} else {
-
 			UE_LOG(LogDungeoScape, Error, TEXT("Could not spawn mobile controls widget."));
-
 		}
 
 	}

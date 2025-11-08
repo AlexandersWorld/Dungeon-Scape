@@ -11,6 +11,8 @@ class UInputComponent;
 class USkeletalMeshComponent;
 class UCameraComponent;
 class UInputAction;
+class AActor;
+class ALock;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -48,6 +50,15 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category ="Input")
 	class UInputAction* MouseLookAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	class UInputAction* InteractAction;
+
+	UPROPERTY(EditAnywhere)
+	float MaxInteractionDistance = 300.0f;
+
+	UPROPERTY(EditAnywhere)
+	float InteractionSphereRadius = 30.0f;
 	
 public:
 	ADungeoScapeCharacter();
@@ -83,12 +94,18 @@ protected:
 	
 
 public:
-
-	/** Returns the first person mesh **/
 	USkeletalMeshComponent* GetFirstPersonMesh() const { return FirstPersonMesh; }
 
-	/** Returns first person camera component **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+	void Interact();
+
+	void CollectItemToBag(AActor* HitActor);
+	void RemoveItemFromBag(AActor* HitActor);
+	void PlaceKey(ALock* LockActor);
+	void ReturnKey(ALock* LockActor);
+private:
+	UPROPERTY(VisibleAnywhere)
+	TArray<FString> ItemsBag;
 };
 
